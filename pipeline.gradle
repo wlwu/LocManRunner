@@ -34,7 +34,7 @@ task uploadToPGYER(type: Exec){
             "-F", "file=@${apk_file_url}",
             "-F", "uKey=e78777cd5f960bdb217b999f1e40d27d",
             "-F", "_api_key=59beab2c9495e3aa0f79c85f2b24cfdb",
-            "https://www.pgyer.com/apiv1/app/upload"
+            "https://qiniu-storage.pgyer.com/apiv1/app/upload"
     ]
     println workingDir
     commandLine 'bash', '-c', "${commands.join(' ')}"
