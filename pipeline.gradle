@@ -1,0 +1,56 @@
+
+def getGitShortVersion = { ->
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine "bash", "-c", "svn info |grep '^Revision:' | sed -e 's/^Revision: //'"
+            standardOutput = stdout
+        }
+        return Integer.parseInt(stdout.toString().trim())
+    }
+    catch (ignored) {
+        return -1;
+    }
+}
+
+gradle.allprojects {
+    ext.buildNumber = {
+        return getGitShortVersion()
+    }
+}
+
+task archiveArtifacts(type: Copy) {
+    from "$buildDir/outputs/apk/"
+    into "./apks/${buildNumber()}/"
+    include "*.apk"
+}
+
+task uploadToPGYER(type: Exec){
+    description = "upload apk to pgyer"
+//    workingDir = "/Users/wuwenliang/company/sf/android/眉山/locman_yzy2.0"
+
+    def commands = [
+            "curl",
+            "-F", "file=@${apk_file_url}",
+            "-F", "uKey=e78777cd5f960bdb217b999f1e40d27d",
+            "-F", "_api_key=59beab2c9495e3aa0f79c85f2b24cfdb",
+            "https://www.pgyer.com/apiv1/app/upload"
+    ]
+    println workingDir
+    commandLine 'bash', '-c', "${commands.join(' ')}"
+
+    standardOutput = new ByteArrayOutputStream()
+    errorOutput = new ByteArrayOutputStream()
+
+    ext.stdout = {
+        return standardOutput.toString()
+    }
+    ext.stderr = {
+        return errorOutput.toString()
+    }
+
+    doLast {
+        println "" + ext.stdout()
+        println "error:" + ext.stderr()
+    }
+}
