@@ -27,6 +27,11 @@ android {
     }
 }
 
+task saveModuleForApplication(){
+    Properties properties=new Properties();
+    properties.setProperty("module","${module_choose_url}");
+}
+
 /*task setPorjectModule(){
     String[] modules="${module_choose_url}".split(",")
     println("--wuwenliangJJPPKK__ the module_choose_url is is::"+module_choose_url)
@@ -71,9 +76,7 @@ dependencies {
 /*    for (String value:project_module){
         compile value
     }*/
-
     String[] modules="${module_choose_url}".split(",")
-    println("--wuwenliangJJPPKK__ the module_choose_url is is::"+module_choose_url)
     for (int i=0;i<modules.size();i++){
         println("--wuwenliangJJPPKK__ the modules[i] is is::"+modules[i])
         if("home".equals(modules[i])){
@@ -94,7 +97,6 @@ dependencies {
             compile "com.cdsf.locman:moduleF:v2.0.0"
         }
     }
-
     compile 'com.alibaba:arouter-api:1.2.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.2'
 }
