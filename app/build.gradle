@@ -32,6 +32,10 @@ task saveModuleForApplication(){
     properties.setProperty("module","${module_choose_url}");
 }
 
+task writeModuleForApplication(){
+
+}
+
 /*task setPorjectModule(){
     String[] modules="${module_choose_url}".split(",")
     println("--wuwenliangJJPPKK__ the module_choose_url is is::"+module_choose_url)
@@ -76,6 +80,7 @@ dependencies {
 /*    for (String value:project_module){
         compile value
     }*/
+    //home,splash,A,B,C
     String[] modules="${module_choose_url}".split(",")
     for (int i=0;i<modules.size();i++){
         println("--wuwenliangJJPPKK__ the modules[i] is is::"+modules[i])
