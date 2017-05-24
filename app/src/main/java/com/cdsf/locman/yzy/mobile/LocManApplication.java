@@ -14,6 +14,9 @@ public class LocManApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ARouter.init(this);
+        ARouter.openDebug();
+        ARouter.openLog();
+        ARouter.printStackTrace();
         Properties properties=new Properties();
         String moduleValue=properties.getProperty("module");
         System.out.println("---wuwenliangJJPPUUIIOOMMMM:::"+moduleValue);
