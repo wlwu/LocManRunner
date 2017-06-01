@@ -50,10 +50,12 @@ task uploadToPGYER(type: Exec){
 
     doLast {
         println "wuwenliang" + ext.stdout()
-        def jsonObject=new JsonSlurper().parse(ext.stdout).getAt("data")
-        def codeObject=new JsonSlurper().parse(jsonObject).getAt("appQRCodeURL")
+        def jsonObject=new JsonSlurper().parse(ext.stdout).find {
+            it=="appQRCodeURL"
+        }
+        //def codeObject=new JsonSlurper().parse(jsonObject).getAt("appQRCodeURL")
 
-        println("wuwenliang the code is is::"+codeObject)
+        println("wuwenliang the code is is::"+jsonObject)
         println "error:" + ext.stderr()
     }
 }
