@@ -49,7 +49,7 @@ task uploadToPGYER(type: Exec){
     }
 
     doLast {
-        println "" + ext.stdout()
+        println "wuwenliang" + ext.stdout()
         println "error:" + ext.stderr()
     }
 }
