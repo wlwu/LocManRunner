@@ -28,7 +28,6 @@ task archiveArtifacts(type: Copy) {
 task uploadToPGYER(type: Exec){
     description = "upload apk to pgyer"
 //    workingDir = "/Users/wuwenliang/company/sf/android/眉山/locman_yzy2.0"
-    println "吴文亮 upload apk upload apk"
     def commands = [
             "curl",
             "-F", "file=@${apk_file_url}",
